@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Donation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007acc;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .form-container {
+            width: 60%;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007acc;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005fa3;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #ff758f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #ff5c77;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Government Donation Form</h1>
+    </header>
+    <div class="form-container">
+        <h2>Provide Details of the Donation</h2>
+        <form id="donationForm" action="mailto:youremail@example.com" method="post" enctype="text/plain" onsubmit="generateMailtoLink(event)">
+            <div class="form-group">
+                <label for="gov-entity">Government Entity (Ministry/Department):</label>
+                <input type="text" id="gov-entity" name="gov-entity" placeholder="e.g. Ministry of Environment" required>
+            </div>
+            <div class="form-group">
+                <label for="auth-person">Authorized Contact Person:</label>
+                <input type="text" id="auth-person" name="auth-person" placeholder="e.g. Mithalesh kumar" required>
+            </div>
+            <div class="form-group">
+                <label for="designation">Designation:</label>
+                <input type="text" id="designation" name="designation" placeholder="e.g. Director of Forests" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Official Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="e.g. contact@ministry.gov.in" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Contact Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g., +1 0000000000" required>
+            </div>
+            <div class="form-group">
+                <label for="allocation">Purpose of Allocation:</label>
+                <textarea id="allocation" name="allocation" rows="3" placeholder="Reforestation in India" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="donation-amount">Donation Amount (INR):</label>
+                <input type="number" id="donation-amount" name="donation-amount" placeholder="1000+" required>
+            </div>
+            <input type="submit" value="Submit Donation">
+        </form>
+        <a href="categories.html" class="back-button">Back to Categories</a>
+    </div>
+
+    <script>
+        // Function to dynamically generate the mailto link based on the form details
+        function generateMailtoLink(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Get the form fields
+            const govEntity = document.getElementById('gov-entity').value;
+            const authPerson = document.getElementById('auth-person').value;
+            const designation = document.getElementById('designation').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const allocation = document.getElementById('allocation').value;
+            const amount = document.getElementById('donation-amount').value;
+
+            // Create the subject and body for the email
+            const subject = "Government Donation Details";
+            const body = `Government Entity: ${govEntity}\nAuthorized Contact: ${authPerson}\nDesignation: ${designation}\nEmail: ${email}\nPhone: ${phone}\nPurpose of Allocation: ${allocation}\nDonation Amount: INR ${amount}`;
+
+            // Generate the mailto link
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Redirect the user to the mailto link
+            window.location.href = mailtoLink;
+        }
+    </script>
+</body>
+</html>
